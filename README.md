@@ -39,5 +39,4 @@
    
    M, N, K = map(int, input().strip().split())
  ```
-       
-
+      
