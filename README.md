@@ -33,11 +33,14 @@
   * 입출력
   입출력을 위한 예제 코드입니다. 빠른 입출력을 위해 다음과 같이 사용한다 하니 알아두면 좋을 듯 해요.    
   아래 코드의 의미는 대략, 사용자의 입력을 input().strip() 을 이용하여 받고, 문자열 마지막의 띄어쓰기를 무시합니다.   
-  그리고 .split()를 통해 띄어쓰기를 구분하고 map(int, ....) 를 이용하여 문자열을 int형으로 변환합니다.   
+  그리고 .split()를 통해 띄어쓰기를 구분하고 map(int, ....) 를 이용하여 문자열을 int형으로 변환합니다.
  ``` python
-   import sys input = sys.stdin.readline
+   import sys 
+   input = sys.stdin.readline
    
    M, N, K = map(int, input().strip().split())
+   # 입력 예시 ) 1 2 3
+   print(f'{M} {N} {K}') # 1 2 3 출력
  ```
   * 강제종료
  ```python
