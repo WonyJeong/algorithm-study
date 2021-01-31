@@ -47,3 +47,5 @@
   sys.exit(0)
   # sys.exit(1)하면 런타임에러 발생
  ```
+ * [시간복잡도 계산](https://life-with-coding.tistory.com/273)
+> 문제 풀기전에 자기 알고리즘 시간복잡도 대략이라도 계산해보고 코딩 시작하세요.
