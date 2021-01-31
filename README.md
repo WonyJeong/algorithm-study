@@ -47,3 +47,4 @@
   sys.exit(0)
   # sys.exit(1)하면 런타임에러 발생
  ```
+ * [시간복잡도 계산](https://life-with-coding.tistory.com/273)
