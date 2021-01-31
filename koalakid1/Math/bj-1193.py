@@ -10,7 +10,11 @@ while True:
     maxCount += nowSection
     if num <= maxCount:
         row = maxCount - num
-        print(f'{row + 1}/{nowSection - row}')
+        if nowSection % 2 == 0:
+            print(f'{nowSection - row}/{row + 1}')
+
+        else:
+            print(f'{row + 1}/{nowSection - row}')
         break
     else:
         nowSection += 1
