@@ -18,7 +18,7 @@ T = int(input())
 for _ in range(T):
     N = int(input())
     zero = [0 for _ in range(N+1)]
-    one = [0 for _ in range(N+1)]
+    one = [0 for _ in range(N+2)]
     zero[0] = 1
     one[1] = 1
 
