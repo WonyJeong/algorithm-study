@@ -14,7 +14,6 @@ def BFS(graph):
         if visited[i] == 0:
             queue.append(i)
             visited[i] = 1
-        print(queue)
         while queue and Start:
             x = queue.popleft()
             for y in graph[x]:
