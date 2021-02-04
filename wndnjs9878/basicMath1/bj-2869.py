@@ -1,20 +1,11 @@
 #2869
 import sys
+import math
 input = sys.stdin.readline
 
 def solved(A, B, V):
-    H = 0 #달팽이가 올라간 높이
-    day = 0
-    while H < V :
-        day += 1  
-        H += (A - B)
-        if H >= V :
-            return day
+    return math.ceil((V-A)/(A-B)) + 1
          
-
-
-
-
 if __name__ == '__main__':
     A, B, V = map(int, input().strip().split())
     print(solved(A,B,V))
