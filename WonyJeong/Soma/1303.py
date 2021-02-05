@@ -27,8 +27,8 @@ def dfs(i, j):
                 ny = y + dy[i]
 
                 if (
-                    0 <= nx < W
-                    and 0 <= ny < H
+                    0 <= nx < H
+                    and 0 <= ny < W
                     and visited[nx][ny] == False
                     and team == arr[nx][ny]
                 ):
