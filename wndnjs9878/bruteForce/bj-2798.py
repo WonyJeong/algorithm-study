@@ -1,14 +1,16 @@
 #2798
+import sys
+input = sys.stdin.readline
 def solved(N,M,cards) :
-    sum = 0
-    for i in range(0, N - 2):
-        for j in range(i + 1, N - 1):
-            for k in range(j + 1, N):
+    maxSum = 0
+    for i in range(0, N):
+        for j in range(i+1, N):
+            for k in range(j+1, N):
                 if cards[i] + cards[j] + cards[k] > M:
                     continue
                 else:
-                        sum = max(sum, cards[i] + cards[j] + cards[k])
-    return sum
+                    maxSum = max(maxSum, cards[i] + cards[j] + cards[k])
+    return maxSum
 
 
 if __name__ == "__main__":
