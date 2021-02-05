@@ -21,7 +21,7 @@ def knapSack(N, K):
                     memo[i][j] = max(v + memo[i - 1][j - w], memo[i - 1][j])
                 else:
                     memo[i][j] = memo[i - 1][j]
-    print(memo)
+    # print(memo)
     print(max(memo[N]))
 
 
