@@ -26,6 +26,7 @@ def matrix(N, M):
                 deletedRowCumSum += idx
                 deletedRowLength += 1
                 print(rowSum - removedColindexSum)
+
         else:
             if visitedCol[idx] == True:
                 print(0)
