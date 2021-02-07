@@ -2,8 +2,6 @@ import sys
 
 input = sys.stdin.readline
 
-### 루프 조건 추가해야함
-
 
 def IOIOIOIO(N, arr):
     ioi = ["I"] + ["O", "I"] * N
@@ -13,24 +11,16 @@ def IOIOIOIO(N, arr):
     i = 0
     j = 0
     while i < len(arr) - 2 * N:
+        if arr[i : i + 2] == ["I", "O"]:
+            temp = 0
+            while arr[i + 1 : i + 3] == oi:
+                i += 2
+                temp += 1
+                if arr[i] == "I" and temp == N:
+                    temp -= 1
+                    answer += 1
 
-        if arr[i] == "I":
-            if ioi == arr[i : i + 2 * N + 1]:
-                temp = 1
-                j = i + 2 * N + 1
-                while True:
-                    if arr[j : j + 2] == oi:
-                        temp += 1
-                        j += 2
-                    else:
-                        break
-                i = j
-                answer += temp
-            else:
-                i += 1
-        else:
-            i += 1
-
+        i += 1
     print(answer)
 
 
