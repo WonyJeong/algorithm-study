@@ -35,4 +35,4 @@ if __name__ == '__main__':
     for key in graph.keys() :
         graph[key].sort()
 
-    print(len(BFS(graph,1).keys())-1)
+    print(len(BFS(graph,1).keys()))
