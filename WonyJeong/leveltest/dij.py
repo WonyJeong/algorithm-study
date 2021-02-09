@@ -20,16 +20,24 @@ def dijkstra(V, K, graph):
                     dist[node] = newPath
                     heapq.heappush(q, (newPath, node))
 
-    for i in range(1, V + 1):
-        print("INF" if dist[i] == INF else dist[i], end=" ")
+    return dist
+
+
+def solution(N, road, K):
+    answer = 0
+    graph = [[] for _ in range(V + 1)]
+    for i in range(0, len(E)):
+        u, v, w = E[i]
+        graph[u].append((v, w))
+        graph[v].append((u, w))
+
+    dist = dijkstra(N, 1, graph)
+
+    for i in range(0, len(dist)):
+        if dist[i] <= K:
+            answer += 1
+
+    return answer
 
 
 if __name__ == "__main__":
-    V, E = map(int, input().strip().split())
-    K = int(input().strip())
-    graph = [[] for _ in range(V + 1)]
-    for _ in range(0, E):
-        u, v, w = map(int, input().strip().split())
-        graph[u].append((v, w))
-
-    dijkstra(V, K, graph)
