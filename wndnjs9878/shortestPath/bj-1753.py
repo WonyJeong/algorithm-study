@@ -5,6 +5,8 @@ input = sys.stdin.readline
 INF = sys.maxsize
 
 def Dijkstra(startNode,V):
+    dp = [INF]*(V+1)
+    heap = []
     dp[startNode] = 0 #가중치 테이블에서 시작 정점에 해당하는 가중치는 0으로 초기화
     heapq.heappush(heap, (0, startNode))
     while len(heap) > 0 :
@@ -30,8 +32,6 @@ def Dijkstra(startNode,V):
 if __name__ == '__main__':
     V, E = map(int, input().strip().split())
     startNode = int(input().strip())
-    dp = [INF]*(V+1)
-    heap = []
     graph = [[] for _ in range(V+1)]
     for _ in range(E) :
         u, v, w = map(int, input().strip().split())
