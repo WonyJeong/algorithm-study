@@ -5,7 +5,7 @@ input = sys.stdin.readline
 INF = sys.maxsize
 
 def Dijkstra(startNode,V):
-    dp[startNode] = 0
+    dp[startNode] = 0 #가중치 테이블에서 시작 정점에 해당하는 가중치는 0으로 초기화
     heapq.heappush(heap, (0, startNode))
     while len(heap) > 0 :
         weight, vertice = heapq.heappop(heap)
@@ -14,6 +14,8 @@ def Dijkstra(startNode,V):
             continue
         for newWeight, nextNode in graph[vertice]:
             nextWeight = newWeight + weight
+            # 다음 노드까지의 가중치가 현재 다음노드가 가중치 테이블에 가지고 있는 가중치보다 작으면 조건 성립
+            # 계산한 다음 노드까지의 가중치를 가중치테이블에 업데이트 하고, 최소 힙에 삽입
             if nextWeight < dp[nextNode]:
                 dp[nextNode] = nextWeight
                 heapq.heappush(heap, (nextWeight, nextNode))
