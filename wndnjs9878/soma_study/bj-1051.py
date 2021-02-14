@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     for i in range(N):
         for j in range(M):
-            for k in range(sideLength):
+            for k in range(1,sideLength):
                 if i+k < N and j+k < M :
                     if square[i][j] == square[i][j+k] == square[i+k][j] == square[i+k][j+k]:
                         if answer < k:
