@@ -16,7 +16,6 @@ if __name__ == '__main__':
     index = [i for i in range(1, N+1)] #풍선 번호
     result = []
 
-
     temp = moveData.pop(idx) # 얼만큼 이동해야되는지
     result.append(index.pop(idx)) #풍선 번호를 결과에 저장
 
