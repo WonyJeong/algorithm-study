@@ -9,12 +9,11 @@ if __name__ == '__main__':
     woolimScore = 0
     startlinkScore = 0
 
-    while woolimScore < startlinkScore :
+    for i in range(9):
         woolimScore += woolim[i]
-        startlinkScore += startlink[i]
-        print('wS: ', woolimScore)
-        print('sS: ',startlinkScore)
         if woolimScore > startlinkScore :
             print("Yes")
             sys.exit(0)
+        startlinkScore += startlink[i]
+        
     print("No")
