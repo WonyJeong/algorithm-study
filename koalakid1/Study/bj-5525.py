@@ -8,14 +8,18 @@ if __name__ == "__main__":
     M = int(input())
     S = input().strip()
 
-    P = ""
-    for _ in range(N):
-        P += "IO"
-    P += "I"
-    lenP = len(P)
+    lenP = 2*N + 1
     count = 0
-    print(S.count(P))
-    for i in range(M - lenP + 1):
-        if S[i:i+lenP] == P:
+    answer = 0
+    for i in range(M):
+        if (count % 2 == 0 and S[i] == "I") or (count % 2 == 1 and S[i] == "O"):
             count += 1
-    print(count)
+        else:
+            if count - lenP >= 0:
+                answer += (count - lenP) // 2 + 1
+            count = 0
+            if S[i] == "I":
+                count += 1
+    if count - lenP >= 0:
+        answer += (count - lenP) // 2 + 1
+    print(answer)
