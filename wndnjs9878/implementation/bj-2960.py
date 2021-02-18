@@ -1,4 +1,4 @@
-#2960
+#2960 N보다 작거나 같은 모든 소수를 찾는 알고리즘
 import sys
 input = sys.stdin.readline
 
