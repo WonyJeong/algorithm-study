@@ -1,3 +1,4 @@
+//https://www.youtube.com/watch?v=rJesac0_Ftw
 var xhttp = new XMLHttpRequest();
 const url = 'http://everysports.iptime.org:5000/home/estimatestock'
 xhttp.open('GET', url, true)
