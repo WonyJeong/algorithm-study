@@ -1,8 +1,8 @@
 //https://www.youtube.com/watch?v=rJesac0_Ftw
 let buttonclicked = 1
-const animalContainer = document.querySelector(".animal-info")
-const btn = document.querySelector(".btn");
-btn.addEventListener("click", function(){
+const animalContainer = document.querySelector(".animal-info");
+const animalbutton = document.querySelector(".animalbutton");
+animalbutton.addEventListener("click", function(){
     var xhttp = new XMLHttpRequest();
     const url = `https://learnwebcode.github.io/json-example/animals-${buttonclicked}.json`;
     
@@ -30,7 +30,7 @@ btn.addEventListener("click", function(){
     xhttp.send();
     buttonclicked++;
     if (buttonclicked > 3) {
-        btn.classList.add("hide-me");
+        animalbutton.classList.add("hide-me");
     }
 });
 

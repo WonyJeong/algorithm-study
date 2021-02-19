@@ -1,3 +1,25 @@
 .hide-me {
     display: none;
 }
+
+.testbutton {
+    background-color: #eb3b5a; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.animalbutton {
+    background-color: #686de0; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+}

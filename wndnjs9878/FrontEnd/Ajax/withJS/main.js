@@ -1,4 +1,7 @@
-function loadDoc(){
+const testbutton = document.querySelector('.testbutton');
+
+testbutton.addEventListener("click", function(){
+    console.log("testbtn clicked!!!");
     var xhttp;
     /*
     if (window.XMLHttpRequest) { //code for firefox, chrome, safari ... any other browsers
@@ -8,6 +11,8 @@ function loadDoc(){
     }
     */
    xhttp = new XMLHttpRequest(); //서버에 통신을 보내겠다
+   xhttp.open('GET', 'ajax_info.txt', true);
+
    //서버에 요청을 보내고 온 반응(상태) onreadyStateChange를 통해 확인한다
    xhttp.onreadystatechange = function() {
         // request에 대한 처리가 끝났고 브라우저로 보낼 반응이 준비됨
@@ -17,12 +22,13 @@ function loadDoc(){
         if(this.readyState == 4 && this.status == 200) {// 서버준비, XMLHttpRequest 응답했음
             document.querySelector(".demo").innerHTML = this.responseText;
             //A.innerHTML = B (js)  A.html(B) (jquery)
+            testbutton.classList.add('hide-me');
         }
 
          // 서버준비안됨. XMLHttpRequest 응답받지 못함.
    } //onreadystatechange
-   xhttp.open('get', 'ajax_info.txt', true);
+   
    xhttp.send();
-
-} //loadDoc
+   
+}); //loadDoc
 
