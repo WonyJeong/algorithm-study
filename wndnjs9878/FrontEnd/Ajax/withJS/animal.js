@@ -1,4 +1,3 @@
-//https://www.youtube.com/watch?v=rJesac0_Ftw
 let buttonclicked = 1
 const animalContainer = document.querySelector(".animal-info");
 const animalbutton = document.querySelector(".animalbutton");
