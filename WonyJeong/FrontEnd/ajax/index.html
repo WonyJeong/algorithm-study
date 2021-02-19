@@ -1,36 +1,55 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(()=>{
+            let stockList = $('#stockList')
+            $('button').click(()=>{
+                $.ajax({
+                    type : 'get',
+                    dataType : 'jsonp',
+                    jsonpCallback: "callback",
+                    url : 'http://localhost/stockList/',
+                    success : (data, status)=>{
+                        stockList =  data.map((item,key)=>{
+                            drawStockListItem(item,key)
+                        })
+                    },
+                    error : (error) =>{
+                        if (error.status === 404){
+                            console.log("404 ERROR!")
+                        }
+                    }
+                })
+            })
+            
+            const drawStockListItem = (item) =>{
+                const stockItem = [
+                    item.stockCode,
+                    item.stockName,
+                    item.stockEstimatePrice,
+                    item.stockPrice,
+                ]
+                let tr = document.createElement('tr')
+                stockItem.map((item) =>{
+                    let td = document.createElement('td')
+                    td.innerText = item
+                    tr.append(td)
+                    stockList.append(tr)
+                })
+            }
+        })
+    </script>
 </head>
-<html>
-
 <body>
-
-  <h2>The XMLHttpRequest Object</h2>
-
-  <p id="demo">Let AJAX change this text.</p>
-
-  <button type="button" onclick="loadDoc()">Change Content</button>
-
-  <script> 
-    function loadDoc() {
-      var xhttp = new XMLHttpRequest()
-      xhttp.onreadystatechange = () => {
-        //서버의 준비가 되어 있는지 확인하기 위한 코드
-        if(xhttp.readyState === 4){
-          //서버준비, XMLHttpRequest 응답했음
-          if(xhttp.status === 200){
-            console.log("작업내용 작성")
-          }
-        }
-      }
-
-      xhttp.open('get','ajax_info.txt',true)
-      xhttp.send()
-
-    }
-  </script>
-
+    <h2>꽁짜로 스토커 쓰는법 ㅋ</h2>
+    <p class= "demo">Let AJAX change this text</p>
+    <button type="button">Change content</button>
+    <table id = "stockList"></table>
 </body>
-
 </html>
