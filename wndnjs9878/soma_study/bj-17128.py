@@ -13,8 +13,9 @@ if __name__ == '__main__':
 
 
     for cow in cowNum:
+        changed = 0
         for j in range(cow-4, cow):
             calculated[j%N] = calculated[j%N]*(-1)
-            answer += 2 * calculated[j%N]
-        
+            changed += calculated[j%N]
+        answer += 2 * changed
         print(answer)
