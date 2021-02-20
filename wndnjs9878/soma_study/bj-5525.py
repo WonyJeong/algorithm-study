@@ -25,14 +25,14 @@ def IOIOI(N,M,S):
     i = 1
     while i < M-1:
         if S[i-1]=='I' and S[i]=='O' and S[i+1]=='I':
-            Pn += 1
+            Pn += 1 #Pn에서 n의 값 체크
             if Pn == N:
                 count += 1 
                 Pn -= 1
-            i += 1
+            i += 1 #2. IOI가 있을 시엔 두 칸 옮김 IO건너뛰고 I부터 시작시키기 위함 
         else :
             Pn = 0
-        i += 1
+        i += 1 # 1. 무조건 한 칸 옮기는데
     return count
 
 if __name__ == '__main__':
