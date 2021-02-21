@@ -4,43 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
+    <script>
+        $(document).ready(()=>{
+            let stockList = $('#stockList')
+            $('button').click(()=>{
+                $.ajax({
+                    type : 'get',
+                    dataType : 'jsonp',
+                    jsonpCallback: "callback",
+                    url : 'http://localhost/stockList/',
+                    success : (data, status)=>{
+                        stockList =  data.map((item,key)=>{
+                            drawStockListItem(item,key)
+                        })
+                    },
+                    error : (error) =>{
+                        if (error.status === 404){
+                            console.log("404 ERROR!")
+                        }
+                    }
+                })
+            })
+            
+            const drawStockListItem = (item) =>{
+                const stockItem = [
+                    item.stockCode,
+                    item.stockName,
+                    item.stockEstimatePrice,
+                    item.stockPrice,
+                ]
+                let tr = document.createElement('tr')
+                stockItem.map((item) =>{
+                    let td = document.createElement('td')
+                    td.innerText = item
+                    tr.append(td)
+                    stockList.append(tr)
+                })
+            }
+        })
+    </script>
 </head>
 <body>
-    <h2> The XMLHttpRequest Object</h2>
+    <h2>꽁짜로 스토커 쓰는법 ㅋ</h2>
     <p class= "demo">Let AJAX change this text</p>
-    <button type="button" onclick="loadDoc()">Change content</button>
-
-    <script>
-        function loadDoc(){
-            var xhttp;
-            /*
-            if (window.XMLHttpRequest) { //code for firefox, chrome, safari ... any other browsers
-                xhttp = new XMLHttpRequest();
-            } else { // code for IE 8 before
-                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            */
-           xhttp = new XMLHttpRequest(); //서버에 통신을 보내겠다
-           //서버에 요청을 보내고 온 반응(상태) onreadyStateChange를 통해 확인한다
-           xhttp.onreadystatechange = function() {
-                // request에 대한 처리가 끝났고 브라우저로 보낼 반응이 준비됨
-
-                console.log(`readyStaete ${this.readyState}`);
-                console.log(`status ${this.status}`);
-                if(this.readyState == 4 && this.status == 200) {// 서버준비, XMLHttpRequest 응답했음
-                    document.querySelector(".demo").innerHTML = this.responseText;
-                    //A.innerHTML = B (js)  A.html(B) (jquery)
-                }
-
-                 // 서버준비안됨. XMLHttpRequest 응답받지 못함.
-           } //onreadystatechange
-           xhttp.open('get', 'ajax_info.txt', true);
-           xhttp.send();
-
-        } //loadDoc
-
-
-    </script>
+    <button type="button">Change content</button>
+    <table id = "stockList"></table>
 </body>
 </html>
