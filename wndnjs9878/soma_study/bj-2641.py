@@ -30,11 +30,10 @@ if __name__ == '__main__':
     for i in range(N):
         sequences.append(sample_seq[i:] + sample_seq[:i])
 
-    sample_seq = reverse(N,sample_seq)
     '''
     2. 주어진 표본 모양 수열로 만들 수 있는 역방향 수열 구하기
     '''
-    
+    sample_seq = reverse(N,sample_seq)
     for i in range(N):
         sequences.append(sample_seq[i:] + sample_seq[:i])
 
