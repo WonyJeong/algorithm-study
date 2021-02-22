@@ -19,7 +19,6 @@ def BFS(maze):
                 if maze[nearY][nearX] == 1:
                     queue.append([nearY, nearX])
                     maze[nearY][nearX] = maze[y][x]+1
-
     return maze[N-1][M-1]
 
 
