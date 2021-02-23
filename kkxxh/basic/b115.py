@@ -1,7 +1,7 @@
 #seq_search()함수를 사용하여
 # 실수 검색
 
-from b114 import seq_search
+from b113 import seq_search
 
 print('실수 검색')
 print('주의 : "End"를 입력할 경우 종료합니다.')
