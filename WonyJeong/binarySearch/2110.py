@@ -3,23 +3,36 @@ import sys
 input = sys.stdin.readline
 
 
-def solution(N, M, arr):
-    l, r = 0, max(arr)
+def solution(N, C, arr):
+    arr = sorted(arr)
+    # 가장 낮은 좌표와 그 다음으로 낮은 좌표의 차이
+    start = arr[1] - arr[0]
+    # 가장 높은 좌표와 가장 낮은 좌표의 차이
+    end = arr[-1] - arr[0]
 
-    while l <= r:
-        mid = (l + r) // 2
-        temp = sum([i - mid if mid < i else 0 for i in arr])
-        if temp > M:
-            l = mid + 1
-        elif temp < M:
-            r = mid - 1
+    result = 0
+    while start <= end:
+        mid = (start + end) // 2  # 해당 gap
+        old = arr[0]
+        count = 1
+
+        for i in range(1, len(arr)):
+            if arr[i] >= old + mid:  # gap 이상
+                count += 1
+                old = arr[i]
+
+        if count >= C:
+            start = mid + 1
+            result = mid
         else:
-            print(mid)
-            return
-    print(r)
+            end = mid - 1
+
+    print(result)
 
 
 if __name__ == "__main__":
-    N, M = map(int, input().strip().split())
-    arr = list(map(int, input().strip().split()))
-    solution(N, M, arr)
+    N, C = map(int, input().strip().split())
+    arr = []
+    for _ in range(N):
+        arr.append(int(input().strip()))
+    solution(N, C, arr)
