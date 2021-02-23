@@ -21,6 +21,7 @@ def lowerbound(value, lis):
 
 def solution(N, arr):
     lis = [arr[0]]
+    v = [-1]
     for i in range(1, N):
         if lis[len(lis) - 1] < arr[i]:
             lis.append(arr[i])
