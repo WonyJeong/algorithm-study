@@ -26,5 +26,3 @@ if __name__ == '__main__':
     query = [list(input().strip().split()) for _ in range(q)]
     for element in solved(square, query) :
         print(element)
-
-
