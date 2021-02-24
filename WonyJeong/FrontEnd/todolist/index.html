@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>My Todo</title>
+    <script>
+        $(document).ready(() => {
+            let todos
+            let todosID = 0
+            const table = document.querySelector("#todoList")
+            let inputTodoTitle = document.querySelector("#inputTodoTitle")
+            let btnAddTodo = document.querySelector("#btnAddTodo")
+            
+            $.ajax({
+                url: "http://localhost/todos/",
+                type: 'get',
+                dataType: "json",
+                success: (res) => {
+                    todos = res
+                    todosID = todos.length
+                    initTodos()
+                },
+                error: (error) => {
+                    console.log("error : ", error)
+                }
+            })
+
+            const handleAddTodo = (event) =>{
+                const newTodo = {
+                    id : parseInt(++todosID),
+                    title : inputTodoTitle.value,
+                    toggle : false
+                }
+                console.log(newTodo)
+                $.ajax({
+                url: "http://localhost/todos/",
+                data : newTodo,
+                type: 'post',
+                dataType: "json",
+                success: (res) => {
+                    todos.push(newTodo)
+                    addTableRow(newTodo)
+                },
+                error: (error) => {
+                    console.log("error : ", error)
+                }
+            })
+            }
+            btnAddTodo.addEventListener('click', handleAddTodo)            
+
+            const deleteTodo = (event) => {
+                const btn = event.target
+                const tr = btn.parentNode
+                todos = todos.filter((item) => item.id !== parseInt(tr.id))
+                table.removeChild(tr)
+                $.ajax({
+                    url: `http://localhost/todos/${tr.id}`,
+                    type : 'delete'
+                }).then((res)=>{})
+            }
+
+            const handelToggle = (event) =>{
+                const checkbox = event.target
+                const td = checkbox.parentNode
+                const tr = td.parentNode
+                todos = todos.map(todo => tr.id === todo.id ? {...todo, toggle : !todo.toggle} : todo)
+            }
+
+            const addTableRow = (todo) =>{
+                var tr = document.createElement('tr')
+                var tdDelBtn = document.createElement('button')
+                var tdId = document.createElement('td')
+                var tdTitle = document.createElement('td')
+                var tdToggle = document.createElement('td')
+                var inputToggle = document.createElement('input')
+                inputToggle.setAttribute("type","checkbox")
+                inputToggle.addEventListener('click',handelToggle)
+                tdDelBtn.addEventListener("click", deleteTodo)
+                tdId.innerText = todo.id * 1
+                tdTitle.innerText = todo.title
+                inputToggle.checked = todo.toggle === "false" || todo.toggle === false ? false : true
+                tdDelBtn.innerText = "삭제"
+                tdToggle.append(inputToggle)
+                tr.id = todo.id
+                tr.append(tdId)
+                tr.append(tdTitle)
+                tr.append(tdToggle)
+                tr.append(tdDelBtn)
+                table.append(tr)
+            }
+
+            const initTodos = () => {
+                todos.map((todo) => {
+                    addTableRow(todo)
+                })
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <center>
+        <h1>My Todo List</h1>
+        <p>url은 my-json-server를 실행 시킨 후, http://localhost/todos 를 사용</p>
+        <p>스크린 렌더링 시, 디비의 데이터를 html에 나타내고, 추가 및 삭제기능 구현하기</p>
+        <br />
+        <hr><br />
+        <table id="todoList" border=1>
+            <th width=50px>번호</th>
+            <th width=300px>제목</th>
+            <th width=50px>토글</th>
+            <th width=50px>삭제</th>
+        </table>
+        <br />
+        <hr><br />
+        <div>
+            <input id="inputTodoTitle" width="500" type="text" placeholder="제목을 입력해 주세요" />
+            <button id="btnAddTodo">추가하기</button>
+        </div>
+    </center>
+</body>
+
+</html>
