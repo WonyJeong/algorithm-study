@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>로그인 페이지</title>
+    <script>
+        $(document).ready(()=>{
+            let dupleInspec = ["", false]
+            const inputId = document.querySelector("#inputId") 
+            const inputPw = document.querySelector("#inputPw")
+            const inputId2 = document.querySelector('#inputId2')
+            const inputPw2 = document.querySelector('#inputPw2')
+            const inputPw22 = document.querySelector('#inputPw22')
+            
+            $("#btnSignin").click(()=>{
+                const [_id,pw] = [inputId.value, inputPw.value]
+                if(_id !== "" && pw !== ""){
+                    $.ajax({
+                        url: `http://localhost/user/?userID=${_id}&pw=${pw}`,
+                        type : 'get',
+                        dataType : 'json',
+                        success : (res) =>{
+                            if(res.length !== 0){
+                                alert(`${_id}님 로그인에 성공하셨습니다`)
+                            }else{
+                                alert("입력한 회원정보를 다시 확인해 주세요")
+                            }
+                        },
+                        error : (error) =>{
+                            alert("회원가입에 실패하였습니다.")
+                        }
+                    })
+                }
+            })
+
+            $("#btnSignup").click(()=>{
+                const [_id,pw,pw2] = [inputId2.value, inputPw2.value, inputPw22.value]
+                if(_id != dupleInspec[0] || !dupleInspec[1]){
+                    alert("아이디 중복검사를 먼저 해주세요")
+                }else if (pw !== pw2){
+                    alert("비밀번호가 일치하지 않습니다.")
+                }else{
+                    const data = {
+                        userId : _id,
+                        pw,
+                    }
+                    $.ajax({
+                        url: "http://localhost/user/",
+                        type : 'post',
+                        data,
+                        dataType : 'json',
+                        success : (res) =>{
+                            alert("회원가입에 성공하였습니다")
+                        },
+                        error : (error) =>{
+                            alert("회원가입에 실패하였습니다.")
+                        }
+                    })
+                }
+            })
+
+            $("#btnCheckDuple").click(()=>{
+                const userInputId = inputId2.value
+                if(userInputId !== ""){
+                    $.ajax({
+                        url: `http://localhost/user/?userId=${userInputId}`,
+                        type : 'get',
+                        success : (res) =>{
+                            if(res.length === 0){
+                                dupleInspec = [userInputId, true]
+                                alert("사용 가능한 아이디 입니다.")
+                            }else{
+                                console.log(res)
+                                alert("중복된 아이디가 존재합니다.")
+                            }
+                        },
+                        error : (error) =>{
+                            console.log(error)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <center>
+        <h1>로그인 및 회원가입</h1>
+        <p>서버에 저장되어있는 회원정보를 기반으로 로그인을 시도</p>
+        <p>로그인이 성공 했다면 성공했다는 alert를 띄어주자</p>
+        <p>회원가입 정보는 "/user" 에 저장한다</p>
+        <br>
+        <hr>
+        <h3>로그인 하기</h3>
+        <input id = "inputId" type="text" placeholder="아이디" /><br><br>
+        <input id = "inputPw" type="text" placeholder="비밀번호" /><br><br>
+        <button id = "btnSignin">로그인하기</button><br><br>
+        <hr>
+        <h3>회원가입 하기</h3>
+        <input id = "inputId2" type="text" placeholder="아이디" /><span><button id = "btnCheckDuple">중복검사</button></span><br><br>
+        <input id = "inputPw2" type="text" placeholder="비밀번호" /><br><br>
+        <input id = "inputPw22" type="text" placeholder="비밀번호 재입력" /><br><br>
+        <button id = "btnSignup">회원가입하기</button><br><br>
+        <hr>
+    </center>
+</body>
+
+</html>

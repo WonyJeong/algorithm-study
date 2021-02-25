@@ -68,6 +68,11 @@
                 const td = checkbox.parentNode
                 const tr = td.parentNode
                 todos = todos.map(todo => tr.id === todo.id ? {...todo, toggle : !todo.toggle} : todo)
+                $.ajax({
+                    url: `http://localhost/todos/${tr.id}`,
+                    type : 'patch',
+                    data : {toggle : checkbox.checked}
+                }).then((res)=>{})
             }
 
             const addTableRow = (todo) =>{
