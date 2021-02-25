@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>My Todo</title>
+    <script>
+        function refresh(){
+            $.ajax({
+                url : "http://localhost/todos",
+                type: 'get',
+                dataType : "json",
+                success : (res)=>{
+                    var str = "";
+                    $.each(res,function(index,value){
+                        str += "<tr id = "+value['id']+">";
+                        str += "    <th width = 50px class='id'>"+value['id']+"</th>"
+                        str += "    <th width = 300px class='title'>"+value['title']+"</th>"
+                        if(value['toggle'] != "false"){
+                            str += "    <th width = 50px><input type='checkbox' class='toggle' checked></th>"
+                        }
+                        else{
+                            str += "    <th width = 50px><input type='checkbox' class='toggle'></th>"
+                        }
+                        str += "    <th width = 50px><button class='delete' id="+value['id']+">삭제</button></th>"
+                        str += "</tr>"
+                    })
+                    $("#add").html(str)
+                },
+                error : (error) =>{
+                    console.log(error)
+                }
+            })
+        }
+        $(document).ready(()=>{
+            // 1. Data rendering
+            let todos;
+            refresh()
+            
+
+            $("#btnAddTodo").on("click",function(e){
+                title = $('#inputTodoTitle').val()
+                console.log(title)
+                $.ajax({
+                    url: 'http://localhost/todos',
+                    type: 'post',
+                    dataType : "json",  
+                    data: {title: title, toggle: false},
+                    success : (result) => {
+                        refresh()
+                    }
+                })
+            })
+            $("#add").on("click",".toggle",function(e){
+                id = $(this).parent().parent().attr("id")
+                checked = $(this).prop("checked")
+                $.ajax({
+                    url: 'http://localhost/todos/'+id,
+                    type: 'patch',
+                    dataType : "json",  
+                    data: {toggle: checked},
+                    success : (result) => {
+                        refresh()
+                    }
+                })
+            })
+            $("#add").on("click",".delete",function(e){
+                id = $(this).attr("id")
+                $.ajax({
+                    url: 'http://localhost/todos/'+id,
+                    type: 'delete',
+                    dataType : "json",  
+                    success : (result) => {
+                        refresh()
+                    }
+                })
+            })
+            
+        })
+    </script>  
+</head>
+<body>
+    <center>
+        <h1>My Todo List</h1>
+        <p>url은 my-json-server를 실행 시킨 후, http://localhost/todos 를 사용</p>
+        <p>스크린 렌더링 시, 디비의 데이터를 html에 나타내고, 추가 및 삭제기능 구현하기</p>
+        <br /><hr><br />
+        <table id ="todoList" border = 1>
+            <th width = 50px>번호</th>
+            <th width = 300px>제목</th>
+            <th width = 50px>토글</th>
+            <th width = 50px>삭제</th>
+        </table>
+        <table id="add" border=1></table>
+        <br /><hr><br />
+        <div>
+            <input id = "inputTodoTitle" width= "500" type = "text" placeholder="제목을 입력해 주세요" />
+            <button id = "btnAddTodo">추가하기</button>
+        </div>
+    </center>
+</body>
+</html>
