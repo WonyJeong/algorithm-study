@@ -5,27 +5,24 @@ input = sys.stdin.readline
 def solved(N, S, seq):
     answer = sys.maxsize
     left = 0
-    right = left + 2
-    seq = sorted(seq)
-    count = 0
-
-    while sum(seq[left:right]) <= S :
-        
-        tmp = sum(seq[left:right])
-        if tmp < S :
+    right = 0
+    Sum = seq[left]
+    while True :
+        if Sum < S :
             right += 1
-        else :
-            print(left, right)
-            count += 1
-            print(count)    
-            answer = min(answer, right-left)
+            if right == N :
+                if answer == sys.maxsize:
+                    return 0
+                break
+            Sum += seq[right]
+        else:
+            # print('log >>> ',left,right)
+            answer = min(answer,right-left+1)
+            Sum -= seq[left]
             left += 1
-            right = left + 2
-    
-    
-    print(answer)
+    return answer
 
 if __name__ == '__main__':
     N, S = map(int, input().strip().split())
     seq = list(map(int, input().strip().split()))
-    solved(N, S, seq)
+    print(solved(N, S, seq))
