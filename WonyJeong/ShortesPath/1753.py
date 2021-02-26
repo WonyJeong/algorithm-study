@@ -24,6 +24,10 @@ def dijkstra(V, K, graph):
         print("INF" if dist[i] == INF else dist[i], end=" ")
 
 
+# V : 노드의 개수
+# E : 간선의 개수
+# K : Root Node
+# u -> v , weight
 if __name__ == "__main__":
     V, E = map(int, input().strip().split())
     K = int(input().strip())

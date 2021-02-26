@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 300px;
+            margin-right: 20px;
+        }
+
+        .exercise {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="stocker.js"></script>
+    <center>
+        <h1>STOCKER API 연습문제</h1>
+        <div>1. text input안에, 종목코드(A015020) 넣고 해당 종목 데이터 불러오기</div>
+        <div class="exercise">
+            <input id="inputEx1" type="text" value="A015020" />
+            <button id="btnEx1">Send</button>
+        </div>
+        <table id="ex1Answer"></table>
+        <br /><br /><br /><br />
+        <div>2. 각 text input에, {A123456, 원영컴패니, 30000, 10000}값을 넣고 POST!!</div>
+        <div>(모든 입력값이 있는지 검사하고! 예측가와 현재가의 자료형은 float 임당)</div>
+        <div class="exercise">
+            <span>종목 코드 : </span><input id="stockCode" type="text" value="A123456" /><br><br>
+            <span>종목 이름 : </span><input id="stockName" type="text" value="원영컴패니" /><br><br>
+            <span>종목 예측가 : </span><input id="stockPrice" type="text" value="30000" /><br><br>
+            <span>종목 현재가 : </span><input id="stockEstimatePrice" type="text" value="10000" /><br><br>
+            <button id="btnEx2">POST!</button>
+        </div>
+        <table id="ex2Answer"></table>
+    </center>
+</body>
+
+</html>
