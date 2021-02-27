@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 페이지</title>
+  </head>
+
+
+  <body>
+    <center>
+      <h1>로그인 및 회원가입</h1>
+      <p>서버에 저장되어있는 회원정보를 기반으로 로그인을 시도</p>
+      <p>로그인이 성공 했다면 성공했다는 alert를 띄어주자</p>
+      <p>회원가입 정보는 "/user" 에 저장한다</p>
+      <br />
+      <hr />
+      <h3>로그인 하기</h3>
+      <input id="loginId" type="text" placeholder="아이디" /><br /><br />
+      <input id="loginPw" type="password" placeholder="비밀번호" /><br /><br />
+      <button id="btnSignin">로그인하기</button><br /><br />
+      <hr />
+      <h3>회원가입 하기</h3>
+      <input id="registerId" type="text" placeholder="아이디" /><span
+        ><button id="duplicatedId">중복검사</button></span
+      ><br /><br />
+      <input
+        id="registerPw"
+        type="password"
+        placeholder="비밀번호"
+      /><br /><br />
+      <input
+        id="registerPwCh"
+        type="password"
+        placeholder="비밀번호 재입력"
+      /><br /><br />
+      <button id="btnSignup" hidden="true">회원가입하기</button><br /><br />
+      <hr />
+    </center>
+  </body>
+  <script src="test3.js"> 
+  </script>
+</html>
