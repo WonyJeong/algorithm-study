@@ -1,78 +1,63 @@
 window.onload = () => {
-  const table = document.querySelector("#ex1Answer");
-  const btnAdd = document.querySelector("#btnEx2");
-  const ipCode = document.querySelector("#stockCode");
-  const ipName = document.querySelector("#stockName");
-  const ipPrice = document.querySelector("#stockPrice");
-  const ipEsti = document.querySelector("#stockEstimatePrice");
-  let stockerList = [];
+  const ex1Answer = document.querySelector("#ex1Answer");
+  const inputEx1 = document.querySelector("#inputEx1");
+  const btnEx1 = document.querySelector("#btnEx1");
 
-  const postData = () => {
-    const newItem = {
-      stockCode: ipCode.value,
-      stockName: ipName.value,
-      stockPrice: ipPrice.value,
-      stockEstimatePrice: ipEsti.value,
-    };
-    fetch("http://localhost/stockList", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(newItem),
-    }).then(async (res) => {
-      console.log(await res.json());
-    });
-  };
-
-  const addTable = () => {
-    stockerList.map((item) => {
+  const getStockItem = (prop) => {
+    fetch(`http://localhost/stockList/?stockCode=${prop}`).then(async (res) => {
       const tr = document.createElement("tr");
+      const item = await res.json();
       const td1 = document.createElement("td");
       const td2 = document.createElement("td");
       const td3 = document.createElement("td");
       const td4 = document.createElement("td");
-      td1.innerText = item.stockCode;
-      td2.innerText = item.stockName;
-      td3.innerText = item.stockPrice;
-      td3.innerText = item.stockEstimatePrice;
+      td1.innerText = item[0].stockCode;
+      td2.innerText = item[0].stockName;
+      td3.innerText = item[0].stockPrice;
+      td4.innerText = item[0].stockEstimatePrice;
       tr.append(td1);
       tr.append(td2);
       tr.append(td3);
       tr.append(td4);
-      table.append(tr);
+      ex1Answer.append(tr);
     });
   };
 
-  const getDate = () => {
-    fetch("http://localhost/stockList")
+  const updateItem = (stockCode) => {
+    const data = JSON.stringify({
+      stockPrice: 123456,
+      temp: 1,
+    });
+    fetch(`http://localhost/stockList/0`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        stockCode,
+        stockPrice: 123456,
+      }),
+    })
       .then(async (res) => {
-        if (res.status === 200) {
-          let json = await res.json();
-          json.map((item) => {
-            stockerList.push({
-              stockCode: item.stockCode,
-              stockName: item.stockName,
-              stockPrice: item.stockPrice,
-              stockEstimatePrice: item.stockEstimatePrice,
-            });
-          });
-        } else {
-          throw new Error(res.status);
-        }
+        console.log(await res.json());
       })
-      .then(() => {
-        addTable();
-      })
-      .catch((err) => {
-        console.log("에러가 발생했습니다. ", err);
+      .catch((error) => {
+        console.log(error);
       });
   };
 
-  const init = () => {
-    btnAdd.addEventListener("click", postData);
-    getDate();
+  const handleSendButton = () => {
+    const stockCode = inputEx1.value;
+    // getStockItem(stockCode);
+    updateItem(stockCode);
   };
 
+  const init = () => {
+    btnEx1.addEventListener("click", () => {
+      if (asd != "" && asdasd != "") {
+        fetch().then().catch();
+      }
+    });
+  };
   init();
 };
