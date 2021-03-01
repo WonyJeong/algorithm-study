@@ -6,14 +6,13 @@ def solution(N, A, M, check):
     for ch in check :
         start = 0
         end = N-1
-        target = ch
         answer = 0
         while (start <= end):
             mid = (start + end) // 2
-            if A[mid] == target :
+            if A[mid] == ch :
                 answer = 1
                 break
-            elif target < A[mid] :
+            elif ch < A[mid] :
                 end = mid - 1
             else : 
                 start = mid +1
