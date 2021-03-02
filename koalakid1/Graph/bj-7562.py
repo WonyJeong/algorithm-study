@@ -18,10 +18,11 @@ def knight(x,y,a,b):
         for i in range(1,3):
             for j in range(4):
                 xn = x + (i % 2 + 1) * xm[j]
-                yn = y + i * ym[j]
+                yn = x + (i) * ym[j]
                 if 0 <= xn < l and 0 <= yn < l and graph[xn][yn]:
                     graph[xn][yn] = False
                     queue.append((xn,yn,w+1))
+                    print(queue)
 
         
 
@@ -33,6 +34,6 @@ if __name__ == "__main__":
         x,y = map(int,input().strip().split())
         a,b = map(int,input().strip().split())
         
-        graph = [[False if (i == x and j == y) else True for j in range(l)] for i in range(l)]
+        graph = [[False if (i == a and j == b) or (i == x and j == y) else True for j in range(l)] for i in range(l)]
         
         knight(x,y,a,b)
