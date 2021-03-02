@@ -1,19 +1,31 @@
-# import sys
+import sys
+from collections import deque
 
-# input = sys.stdin.readline
-
-
-# def hanoi(a, b, c, N, history):
-#     if c == [i for i in range(1, N + 1)]:
-#         return
-
-#     # if
-#     print(top)
+input = sys.stdin.readline
 
 
-# if __name__ == "__main__":
-#     N = int(input().strip())
-#     a = [i for i in range(1, N + 1)]
-#     b = []
-#     c = []
-#     hanoi(a, b, c, N, [])
+def move(start, to):
+    answer.append([start, to])
+
+
+def hanoi(N, start, to, via):
+    if N == 1:
+        move(start, to)
+    else:
+        hanoi(N - 1, start, via, to)
+        move(start, to)
+        hanoi(N - 1, via, to, start)
+
+
+def solution(N):
+    global answer
+    answer = []
+    hanoi(N, 1, 3, 2)
+
+    print(len(answer))
+    for i, j in answer:
+        print(i, j)
+
+
+if __name__ == "__main__":
+    solution(int(input().strip()))
