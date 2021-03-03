@@ -10,8 +10,7 @@ def solved(N,K):
         mid = (start + end) // 2 
         step = 0
         for i in range(1, N+1):
-            step += min( mid // i, N)
-        
+            step += min( mid // i, N )
         if step >= K : #이분탐색 실행   
             answer = mid
             end = mid - 1
