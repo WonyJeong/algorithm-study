@@ -4,19 +4,21 @@ input = sys.stdin.readline
 
 def solved(N,K):
     start = 1
-    end = pow(N,2)
-    step = 0
+    end = K
 
     while start <= end :
         mid = (start + end) // 2 
-        step  += 1
-        if K == mid :
-            print(step * (step+1))
-            break
-        elif mid < K :
-            start = mid + 1
-        else :
+        step = 0
+        for i in range(1, N+1):
+            step += min( mid // i, N)
+        
+        if step >= K : #이분탐색 실행   
+            answer = mid
             end = mid - 1
+        else :
+            start = mid + 1
+
+    print(answer)
 
 if __name__ == '__main__':
     N = int(input().strip())
