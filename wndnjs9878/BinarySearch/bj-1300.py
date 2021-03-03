@@ -1,8 +1,12 @@
-#1037
+#1300
 import sys
 input = sys.stdin.readline
 
+def solved(N,K):
+
+
+
 if __name__ == '__main__':
     N = int(input().strip())
-    factor = list(map(int, input().strip().split()))
-    print(max(factor)*min(factor))
+    K = int(input().strip())
+    solved(N,K)
