@@ -8,10 +8,12 @@ def init(node, start, end):
         tree[node] = l[start]
         return tree[node]
     else:
-        tree[node] = init(node * 2, start, (start + end) // 2) * init(
-            node * 2 + 1, (start + end) // 2 + 1, end
+        tree[node] = (
+            init(node * 2, start, (start + end) // 2)
+            * init(node * 2 + 1, (start + end) // 2 + 1, end)
+            % 1000000007
         )
-        return tree[node]
+        return tree[node] % 1000000007
 
 
 def subMul(node, start, end, left, right):
@@ -19,10 +21,12 @@ def subMul(node, start, end, left, right):
         return 1
     else:
         if left <= start and right >= end:
-            return tree[node]
+            return tree[node] % 1000000007
         else:
-            return subMul(node * 2, start, (start + end) // 2, left, right) * subMul(
-                node * 2 + 1, (start + end) // 2 + 1, end, left, right
+            return (
+                subMul(node * 2, start, (start + end) // 2, left, right)
+                * subMul(node * 2 + 1, (start + end) // 2 + 1, end, left, right)
+                % 1000000007
             )
 
 
@@ -30,14 +34,14 @@ def update(node, start, end, index, diff):
     if index < start or index > end:
         return
 
-    if start != end:
-        update(node * 2, start, (start + end) // 2, index, diff)
-        update(node * 2 + 1, (start + end) // 2 + 1, end, index, diff)
-
     if tree[node] == 0:
         tree[node] = diff
     else:
-        tree[node] = int(tree[node] * diff)
+        tree[node] = int(tree[node] * diff) % 1000000007
+
+    if start != end:
+        update(node * 2, start, (start + end) // 2, index, diff)
+        update(node * 2 + 1, (start + end) // 2 + 1, end, index, diff)
 
 
 if __name__ == "__main__":
@@ -52,15 +56,13 @@ if __name__ == "__main__":
         a, b, c = map(int, input().strip().split())
         if a == 1:
             b = b - 1
-
             if l[b] == 0:
                 diff = c
             elif c == 0:
                 diff = c
             else:
                 diff = c / l[b]
-
             l[b] = c
             update(1, 0, n - 1, b, diff)
         elif a == 2:
-            print(subMul(1, 0, n - 1, b - 1, c - 1) % 1000000007)
+            print(subMul(1, 0, n - 1, b - 1, c - 1))
