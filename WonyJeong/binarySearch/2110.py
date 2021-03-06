@@ -5,21 +5,20 @@ input = sys.stdin.readline
 
 def solution(N, C, arr):
     arr = sorted(arr)
-    # 가장 낮은 좌표와 그 다음으로 낮은 좌표의 차이
-    start = arr[1] - arr[0]
-    # 가장 높은 좌표와 가장 낮은 좌표의 차이
-    end = arr[-1] - arr[0]
-
+    start = 1
+    end = arr[N - 1] - arr[0]
+    mid = (start + end) // 2
     result = 0
+
     while start <= end:
-        mid = (start + end) // 2  # 해당 gap
-        old = arr[0]
+        mid = (start + end) // 2
+        frontHouse = arr[0]
         count = 1
 
         for i in range(1, len(arr)):
-            if arr[i] >= old + mid:  # gap 이상
+            if arr[i] >= frontHouse + mid:
                 count += 1
-                old = arr[i]
+                frontHouse = arr[i]
 
         if count >= C:
             start = mid + 1
