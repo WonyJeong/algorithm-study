@@ -35,10 +35,7 @@ def solution(info, query):
                         else:
                             match += 1
                     # print(match)
-           
-                
 
-            
             if match == 4:
                 answer[query] += 1
             # print('log>>>',answer[query])
