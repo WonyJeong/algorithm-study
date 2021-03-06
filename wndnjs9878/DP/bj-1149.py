@@ -9,7 +9,7 @@ def solution(N,home):
         home[i][1] = min(home[i-1][0],home[i-1][2]) + home[i][1]
         home[i][2] = min(home[i-1][0],home[i-1][1]) + home[i][2]
     
-    answer = min(home[i][0], home[i][1], home[i][2])
+    answer = min(home[N-1][0], home[N-1][1], home[N-1][2])
 
     return answer
 
