@@ -22,14 +22,11 @@ def solution(info, query):
     for query in range(len(dividedQuery)): #각 쿼리에 대해서 
         for person in dividedInfo: #지원자 수만큼 포문
             match = 0 # 새로운 지원자의 매칭 조건을 따지기 위한 변수 초기화 
-            for i in range(5):
+            # 점수는 개발팀이 원하는 점수 이상이기만 하면 됨
+            if int(dividedQuery[query][-1]) <= int(person[-1]):
+                for i in range(4):
                 # print(dividedQuery[query][i], person[i])
 
-                if i == 4 : # 점수는 개발팀이 원하는 점수 이상이기만 하면 됨
-                    if int(dividedQuery[query][i]) <= int(person[i]):
-                        match += 1
-
-                else :
                     if dividedQuery[query][i] == '-' :
                         match += 1
                     else :
@@ -37,8 +34,12 @@ def solution(info, query):
                             break #매칭되지 않는 요소가 나오면 더 이상 볼 필요 없음 
                         else:
                             match += 1
-                # print(match)
-            if match == 5:
+                    # print(match)
+           
+                
+
+            
+            if match == 4:
                 answer[query] += 1
             # print('log>>>',answer[query])
 
