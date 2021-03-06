@@ -1,5 +1,6 @@
 import sys
 from itertools import combinations
+from bisect import bisect_left
 
 input = sys.stdin.readline
 
@@ -7,16 +8,17 @@ input = sys.stdin.readline
 def solution(info, query):
     answer = []
     user = {}
-    allScore = []
     for info_ in info:
         user_ = info_.split(" ")
         user_[4] = int(user_[4])
-        allScore.append(user_[4])
-        for i in range(1, 5):
+        for i in range(0, 5):
             for com in combinations(user_[:4], i):
                 if not com in user.keys():
-                    user[com] = set()
-                user[com].add(user_[4])
+                    user[com] = []
+                user[com].append(user_[4])
+
+    for key in user.keys():
+        user[key] = sorted(user[key])
 
     for q in query:
         result = 0
@@ -29,23 +31,14 @@ def solution(info, query):
             if q_[i] != "-":
                 temp.append(q_[i])
 
-        if len(temp) == 0:
-            for score in allScore:
-                if score >= q_[4]:
-                    result += 1
-        else:
-            tup = tuple(temp)
-            if not tup in user.keys():
-                answer.append(0)
-                continue
-
-            for score in user[tup]:
-                if score >= q_[4]:
-                    result += 1
-        answer.append(result)
+        tup = tuple(temp)
+        try:
+            lowerbound = bisect_left(user[tup], q_[4])
+            answer.append(len(user[tup]) - lowerbound)
+        except:
+            answer.append(0)
 
     return answer
-    print(answer)
 
 
 if __name__ == "__main__":
