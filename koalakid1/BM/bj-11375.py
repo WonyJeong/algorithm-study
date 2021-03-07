@@ -23,8 +23,7 @@ if __name__ == "__main__":
     for _ in range(n):
         job.append(list(map(int,input().strip().split()))[1:])
     
-    print(job)
-    d = [0 for _ in range(n+1)]
+    d = [0 for _ in range(m+1)]
     count = 0
     for i in range(1,n+1):
         visit = [0 for i in range(n+1)]
