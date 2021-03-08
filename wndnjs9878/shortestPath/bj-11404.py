@@ -16,8 +16,8 @@ def solution(n,m,bus_info):
                     dist[v1][v2] = 0
                     continue
                 
-                else:
-                    dist[v1][v2] = min(dist[v1][v2],dist[v1][i] + dist[i][v2])
+                if dist[v1][v2] > dist[v1][i] + dist[i][v2]:
+                    dist[v1][v2] = dist[v1][i] + dist[i][v2]
     
     for i in range(1,n+1):
         for j in range(1,n+1):
@@ -26,8 +26,6 @@ def solution(n,m,bus_info):
             else:
                 print(dist[i][j],end=' ')
         print()
-
-
 
 
 if __name__ == '__main__':

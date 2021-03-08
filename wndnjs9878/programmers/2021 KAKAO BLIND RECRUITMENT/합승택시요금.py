@@ -16,8 +16,9 @@ def solution(n,s,a,b,fares):
                     dist[v1][v2] = 0
                     continue
                 
+                #else로 처리하면 시간초과남
                 if dist[v1][v2] > dist[v1][i] + dist[i][v2]:
-                    dist[v1][v2] = min(dist[v1][v2],dist[v1][i] + dist[i][v2])
+                    dist[v1][v2] = dist[v1][i] + dist[i][v2]
                     
     answer = dist[s][a] + dist[s][b]
     for i in range(1, n + 1):
