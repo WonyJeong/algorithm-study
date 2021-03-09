@@ -11,7 +11,6 @@ def solution(n, arr):
             memo[i] = max(memo[i + t] + p, memo[i + 1])
         else:
             memo[i] = memo[i + 1]
-        print(i, t, memo)
     print(memo[0])
 
 
