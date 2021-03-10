@@ -12,7 +12,7 @@ def solution(N,seq):
         else :
             answer[i] = seq[i]
 
-    print(answer)
+    #print(answer)
     return max(answer)
 
 
