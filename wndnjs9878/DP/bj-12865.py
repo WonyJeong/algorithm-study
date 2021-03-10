@@ -16,12 +16,12 @@ def solution(N,K,stuff):
             else:
                 answer[i][j] = max(answer[i - 1][j - weight] + value, answer[i - 1][j])
 
-    print(answer)
+    # print(answer)
     return answer[N-1][K]
 
 
 '''
-1차원 배열 
+1차원 배열  : 2차원 배열보다 메모리 크지만, 시간 빠름
 def solution(N,K,stuff):
     answer = [0 for _ in range(K + 1)]
     for i in range(N):
