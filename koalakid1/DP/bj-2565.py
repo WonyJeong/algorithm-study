@@ -20,8 +20,8 @@ if __name__ == "__main__":
     for i in range(1,n):
         if lis[-1] < B[i]:
             lis.append(B[i])
-            
+
         elif lis[-1] > B[i]:
             lis[bisect_left(lis,B[i])] = B[i]
-        print(lis)
-    print(len(lis))
+            
+    print(n - len(lis))
