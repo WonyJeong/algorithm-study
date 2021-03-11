@@ -15,7 +15,6 @@ if __name__ == "__main__":
                     d[i].append(d[i-1][j] + l[j])
                     d[i].append(d[i-1][j] + l[j+1])
                 else:
-                    print(len(d[i-1]))
                     if j == 0:
                         d[i].append(d[i-1][j] + l[j])
                         d[i].append(max(d[i-1][j],d[i-1][j+1]) + l[j+1])
@@ -23,5 +22,4 @@ if __name__ == "__main__":
                         d[i].append(d[i-1][j] + l[j+1])
                     else:
                         d[i].append(max(d[i-1][j],d[i-1][j+1]) + l[j+1])
-                print(l,d)
     print(max(d[n-1]))
