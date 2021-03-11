@@ -1,5 +1,4 @@
 import sys
-from itertools import combinations
 
 input = sys.stdin.readline
 
@@ -8,57 +7,56 @@ dy = [0, 1, 0, -1]
 
 
 def drawMap(N, area, i, j):
+    numOfCows = 0
     stack = [[i, j]]
     parm[i][j] = area
     while stack:
         x, y = stack.pop()
-        if parm[x][y] == area:
-            for i in range(4):
-                nx = x + dx[i]
-                ny = y + dy[i]
-                if not tuple([nx, ny]) in bridge[x][y]:
-                    if 0 <= nx < N and 0 <= ny < N and parm[nx][ny] == -1:
-                        parm[nx][ny] = area
-                        stack.append([nx, ny])
+        numOfCows += cows[x][y]
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if not [x, y, nx, ny] in bridge:
+                if 0 <= nx < N and 0 <= ny < N and parm[nx][ny] == -1:
+                    parm[nx][ny] = area
+                    stack.append([nx, ny])
+    return numOfCows
 
 
-def solution(N, bridges, cows):
-    global parm, bridge
-    answer = 0
-    area = 0
+def solution(N):
+    global parm
     parm = [[-1 for _ in range(N)] for _ in range(N)]
-    bridge = [[set() for _ in range(N)] for _ in range(N)]
-
-    for x, y, z, w in bridges:
-        bridge[x][y].add(tuple([z, w]))
-        bridge[z][w].add(tuple([x, y]))
-
+    count = []
+    area = 0
     for i in range(N):
         for j in range(N):
             if parm[i][j] == -1:
-                drawMap(N, area, i, j)
+                count.append(drawMap(N, area, i, j))
                 area += 1
 
-    for comb in combinations(cows, 2):
-        u, v = list(comb)
-        x, y = u[0] - 1, u[1] - 1
-        z, w = v[0] - 1, v[1] - 1
+    answer = 0
+    for i in range(len(count) - 1):
+        temp = count[i]
+        temp2 = 0
+        for j in range(i + 1, len(count)):
+            temp2 += count[j]
+        answer += temp * temp2
 
-        if parm[x][y] != parm[z][w]:
-            print(u, v, " 는 반드시 다리를 건너야만 만날 수 있다.")
-            answer += 1
-    for p in parm:
-        print(p)
     print(answer)
 
 
 if __name__ == "__main__":
+    global cows, bridge
     N, M, K = map(int, input().strip().split())
     bridge = []
-    cows = []
+    cows = [[0 for _ in range(N)] for _ in range(N)]
+
     for _ in range(M):
         x, y, z, w = map(int, input().strip().split())
         bridge.append([x - 1, y - 1, z - 1, w - 1])
+        bridge.append([z - 1, w - 1, x - 1, y - 1])
+
     for _ in range(K):
-        cows.append(list(map(int, input().strip().split())))
-    solution(N, bridge, cows)
+        i, j = map(int, input().strip().split())
+        cows[i - 1][j - 1] = 1
+    solution(N)
