@@ -1,9 +1,9 @@
-#4948
+#4948 에라토스테네스의 체 
 import sys
-import math
 input = sys.stdin.readline
 
 def solution(N):
+    # 에라토스테네스의 체
     isPrime = [False,False] + [True] * (N * 2 - 1)
     
     for i in range(2, 2*N+1):
@@ -11,12 +11,12 @@ def solution(N):
             for j in range(2*i, 2*N+1, i):
                 isPrime[j] = False
 
+    # 주어진 범위에서 소수 개수 구하기 
     count = 0
     for i in range(N+1, 2*N+1):
         if isPrime[i]:
             #print(i)
             count += 1
-
 
     return count
 
