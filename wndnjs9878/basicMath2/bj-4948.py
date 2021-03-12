@@ -8,7 +8,6 @@ def solution(N):
     
     for i in range(2, 2*N+1):
         if isPrime[i]:
-            isPrime.append(i)
             for j in range(2*i, 2*N+1, i):
                 isPrime[j] = False
 
