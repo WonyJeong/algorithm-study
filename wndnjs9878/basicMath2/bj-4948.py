@@ -8,6 +8,7 @@ def solution(N):
     
     for i in range(2, 2*N+1):
         if isPrime[i]:
+            # 소수 따로 저장하고 싶을때, 코드 작성하는 부분
             for j in range(2*i, 2*N+1, i):
                 isPrime[j] = False
 
